@@ -3,6 +3,8 @@ package wei.endpoint;
 public class Order {
     String id;
 
+    public Order() {}
+
     public Order(String id) {
         this.id = id;
     }

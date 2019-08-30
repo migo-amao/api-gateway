@@ -1,5 +1,5 @@
 server:
-  port: 8180
+  port: 8100
   context-path: /edge-service
 
 security:
@@ -7,11 +7,11 @@ security:
     client:
       client-id: edge-service
       client-secret: secret
-      user-authorization-uri: http://localhost:8080/authorization-service/oauth/authorize
-      access-token-uri: http://localhost:8080/authorization-service/oauth/token
+      user-authorization-uri: http://localhost:8000/authorization-service/oauth/authorize
+      access-token-uri: http://localhost:8000/authorization-service/oauth/token
       grant-type: authorization_code, refresh_token
     resource:
-      user-info-uri: http://localhost:8080/authorization-service/user/me
-      token-info-uri: http://localhost:8080/authorization-service/oauth/check_token
+      user-info-uri: http://localhost:8000/authorization-service/user/me
+      token-info-uri: http://localhost:8000/authorization-service/oauth/check_token
       jwt:
-        key-uri: http://localhost:8080/authorization-service/oauth/token_key
+        key-uri: http://localhost:8000/authorization-service/oauth/token_key

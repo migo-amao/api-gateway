@@ -1,17 +1,36 @@
 server:
-  port: 8100
-  context-path: /edge-service
+  port: 8180
+  servlet:
+    context-path: /edge-service
 
-security:
-  oauth2:
-    client:
-      client-id: edge-service
-      client-secret: secret
-      user-authorization-uri: http://localhost:8000/authorization-service/oauth/authorize
-      access-token-uri: http://localhost:8000/authorization-service/oauth/token
-      grant-type: authorization_code, refresh_token
-    resource:
-      user-info-uri: http://localhost:8000/authorization-service/user/me
-      token-info-uri: http://localhost:8000/authorization-service/oauth/check_token
-      jwt:
-        key-uri: http://localhost:8000/authorization-service/oauth/token_key
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          api-gateway:
+            client-id: edge-service
+            client-secret: secret
+            provider: auth-server
+            authorization-grant-type: authorization_code
+            #redirectUri:
+            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+        provider:
+          auth-server:
+            authorization-uri: http://localhost:8000/authorization-service/oauth/authorize
+            token-uri: http://localhost:8000/authorization-service/oauth/token
+            #jwk-set-uri: http://localhost:8000/authorization-service/oauth/token_key
+
+#security:
+#  oauth2:
+#    client:
+#      client-id: edge-service
+#      client-secret: secret
+#      user-authorization-uri: http://localhost:8000/authorization-service/oauth/authorize
+#      access-token-uri: http://localhost:8000/authorization-service/oauth/token
+#      grant-type: authorization_code, refresh_token
+#    resource:
+#      user-info-uri: http://localhost:8000/authorization-service/user/me
+#      token-info-uri: http://localhost:8000/authorization-service/oauth/check_token
+#      jwt:
+#        key-uri: http://localhost:8000/authorization-service/oauth/token_key
